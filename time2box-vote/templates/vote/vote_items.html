@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>编辑</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet"
+	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<link href="/static/css/clean-blog.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- Main Content -->
+	<div class="container">
+		<form action="" method="get">
+			{% raw xsrf_form_html() %}
+			
+			<input type="hidden" name="id" value="{{vote['id']}}">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<div class="post-preview">
+						<h2 class="post-title">{{vote['title']}}</h2>
+						<img class="img-responsive" src="{{vote['imgUrl']}}">
+						<h3 class="post-subtitle">{{vote['subTitle']}}</h3>
+						<ul>
+							{% for item in vote['items'] %}
+								<li>
+								{% if item['imgUrl'] %}
+									<img src="{{item['imgUrl']}}!200x200" width="60" height="60" class="img-circle"> 
+								{% end %}
+								{{item['text']}} ({{item['num']}}票)</li> 
+							{% end %}
+						</ul>
+					</div>
+					<hr />
+				</div>
+				<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<!-- Pager -->
+					<ul class="pager">
+						<li class="previous">
+							<a href="/vote/admin/item?id={{vote['id']}}" class="defbtn">添加选项</a>
+						</li>
+						<li class="next">
+							<a href="/vote/info?id={{vote['id']}}" class="defbtn">发布 &rarr;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- jQuery -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+</body>
+</html>
